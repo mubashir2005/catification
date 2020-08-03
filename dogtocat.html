@@ -2,14 +2,13 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Changing attributes</title>
+        <title>Cat</title>
         <style>
-            p .animal {
-                color: red;
+            .catcolors {
+                color: orange;
+                background-color: black;
             }
-            a[href*="Dog"]{
-                color: purple;
-            }
+            
         </style>
     </head>
     <body>
@@ -23,24 +22,38 @@
         <img src="https://www.kasandbox.org/programming-images/animals/dogs_collies.png" height="150">
         
         <script>
+            var imageEls = document.getElementsByTagName("img");
+            for (var i = 0; i < imageEls.length; i++) {
+                imageEls[i].src = "https://www.kasandbox.org/programming-images/animals/cat.png";
+            }
+            
+            var linkEls = document.querySelectorAll("a[href*=\"Dog\"]");
+            for (var i = 0; i < linkEls.length; i++) {
+                linkEls[i].href = "http://en.wikipedia.org/wiki/Cat";
+            }
+            
             var headingEl = document.querySelector("#heading");
-            headingEl.innerHTML = "All about cats";
+            headingEl.className = "catcolors";
+            headingEl.style.textAlign = "center";
+            headingEl.textContent = "All about cats";
             
             var nameEls = document.querySelectorAll("p .animal");
-            console.log(nameEls);
-            // NodeList
-            console.log(nameEls[0]);
             for (var i = 0; i < nameEls.length; i++) {
-                nameEls[i].innerHTML = "cat";
+                var strongEl= document.createElement("strong");
+                
+                var strongText= document.createTextNode("cat");
+                strongEl.appendChild(strongText);
+                nameEls[i].innerHTML="";
+                
+                nameEls[i].appendChild(strongEl);
+
+                nameEls[i].className += " catcolors";
             }
-            var imageEls= document.getElementsByTagName('img');
-            for(i=0;i<imageEls.length;i++){
-                imageEls[i].src= "https://www.kasandbox.org/programming-images/animals/cat.png";
-            }
-            var linkEls= document.querySelectorAll('a[href*=\"Dog\"]');
-            for(i=0;i<linkEls.length;i++){
-                linkEls[i].href="http://en.wikipedia.org/wiki/Cat";
-            }
+            var catEl = document.createElement("img");
+            catEl.src="https://www.kasandbox.org/programming-images/animals/cat.png";
+            catEl.alt="Photo of cute cat.";
+
+            document.body.appendChild(catEl);
         </script>
         
     </body>
